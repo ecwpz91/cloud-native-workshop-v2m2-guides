@@ -25,7 +25,7 @@ First, open a new brower with the [OpenShift web console]({{ CONSOLE_URL}}){:tar
 Login using:
 
 * Username: `userXX`
-* Password: `r3dh4t1!`
+* Password: `{{ OPENSHIFT_USER_PASSWORD }}`
 
 > **NOTE**: Use of self-signed certificates
 >
@@ -314,7 +314,7 @@ Invoke the pipeline once more by navigating to _Builds > Build Configs > monolit
 Click on the link for **Input Required**. This will open a new tab and direct you to Jenkins itself, where you can login with the same credentials as OpenShift:
 
 * Username: `userXX`
-* Password: `r3dh4t1!`
+* Password: `{{ OPENSHIFT_USER_PASSWORD }}`
 
 Accept the browser certificate warning and the Jenkins/OpenShift permissions, and then you'll find yourself at the approval prompt:
 
@@ -355,7 +355,7 @@ Then go back to the _Overview_ tab. At the bottom you'll find the _Generic_ webh
 Go to your Git repository at `{{ GIT_URL }}/userXX/cloud-native-workshop-v2m2-labs.git` (replace `userXX` with your username and open this URL in a new tab), Click **Sign In** and sign in with your credentials:
 
 * Username: `userXX` (replace with your username)
-* Password: `r3dh4t1!`
+* Password: `{{ OPENSHIFT_USER_PASSWORD }}`
 
  then click on **Settings**.
 
