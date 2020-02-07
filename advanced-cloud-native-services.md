@@ -171,7 +171,7 @@ Although your Eclipse Che workspace is running on the Kubernetes cluster, it's r
 Enter your username and password assigned to you:
 
 * Username: `userXX`
-* Password: `r3dh4t1!`
+* Password: `{{ OPENSHIFT_USER_PASSWORD }}`
 
 You should see like:
 
