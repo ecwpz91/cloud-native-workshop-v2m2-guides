@@ -69,7 +69,7 @@ And finally deploy template:
 
 `oc new-app --template=coolstore-monolith-pipeline-build`
 
-We have to deploy a **Jenkins Server** in the namespace because OpenShift 4 doesn't deploy a Jenkins server automatically when we use _Jenkins Pipeline_ build strategy.
+We have to deploy a **Jenkins Server** in the namespace because OpenShift doesn't deploy a Jenkins server automatically when we use _Jenkins Pipeline_ build strategy.
 
 `oc new-app --template=jenkins-ephemeral -l app=jenkins -p JENKINS_SERVICE_NAME=jenkins -p DISABLE_ADMINISTRATIVE_MONITORS=true`
 
@@ -80,7 +80,7 @@ As you probably guessed it will also include a Jenkins Pipeline to control the p
 
 Navigate to the Web Console to see your new app and the components using this link:
 
-* Coolstore Prod Project Status at [OpenShift web console]({{ CONSOLE_URL}}){:target="_blank"}:
+* Coolstore Prod Project Overview at [OpenShift web console]({{ CONSOLE_URL}}){:target="_blank"}:
 
 ![Prod]({% image_path coolstore-prod-overview.png %})
 
@@ -117,7 +117,7 @@ As part of the production environment template you used in the last step, a Pipe
 
 ---
 
-Our pipeline is somewhat simplified for the purposes of this Workshop. Inspect the contents of the pipeline by navigating _Builds > Build Configs_ and click on `monolith-pipeline` in the [OpenShift web console]({{ CONSOLE_URL}}){:target="_blank"}. Then, you will see the details of _Jenkinsfile_ on the right side:
+Our pipeline is somewhat simplified for the purposes of this Workshop. Inspect the contents of the pipeline by navigating _Builds > Pipelines_ and click on `monolith-pipeline` in the [OpenShift web console]({{ CONSOLE_URL}}){:target="_blank"}. Then, click Actions > Edit in the top right hand corner and you will see the details of _Jenkinsfile_:
 
 ![monolith-pipeline]({% image_path coolstore-prod-monolith-bc.png %})
 
