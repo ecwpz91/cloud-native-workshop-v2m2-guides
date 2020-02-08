@@ -187,6 +187,10 @@ Move to **YAML** tab and replace your username with _userXX_ then click on **Sav
 
 Let's invoke the build pipeline by using [OpenShift web console]({{ CONSOLE_URL}}){:target="_blank"}. Open the production project in the web console.
 
+You can also add the edit policy for the `userXX-coolstore-prod` Jenkins service account to the `userXX-coolstore-dev` project via the following command from the CodeReady Workspaces Terminal window:
+
+`oc policy add-role-to-user edit system:serviceaccount:userXX-coolstore-prod:jenkins -n userXX-coolstore-dev`
+
 Next, navigate to _Builds > Build Configs > monolith-pipeline_, click the small menu at the far right, and click _Start Build_:
 
 ![Prod]({% image_path pipe-start.png %})
