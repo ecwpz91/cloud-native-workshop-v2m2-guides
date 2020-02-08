@@ -117,7 +117,7 @@ As part of the production environment template you used in the last step, a Pipe
 
 ---
 
-Our pipeline is somewhat simplified for the purposes of this Workshop. Inspect the contents of the pipeline by navigating _Builds > Pipelines_ and click on `monolith-pipeline` in the [OpenShift web console]({{ CONSOLE_URL}}){:target="_blank"}. Then, click Actions > Edit in the top right hand corner and you will see the details of _Jenkinsfile_:
+Our pipeline is somewhat simplified for the purposes of this Workshop. Inspect the contents of the pipeline by navigating _Builds > Pipelines_ and click on `monolith-pipeline` in the [OpenShift web console]({{ CONSOLE_URL}}){:target="_blank"}. Then, click _Actions > Edit_ in the top right hand corner and you will see the details of _Jenkinsfile_:
 
 ![monolith-pipeline]({% image_path coolstore-prod-monolith-bc.png %})
 
