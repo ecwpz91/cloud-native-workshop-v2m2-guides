@@ -201,7 +201,7 @@ You can also add the edit policy for the **userXX-coolstore-prod** Jenkins servi
 
 Let's invoke the build pipeline by using [OpenShift web console]({{ CONSOLE_URL}}){:target="_blank"}. Open the production project in the web console.
 
-Next, navigate to _Builds > Pipelines > monolith-pipeline_, and click _Start Build_:
+Next, navigate to _Builds > Pipelines > monolith-pipeline_, and click _Start Pipeline_:
 
 ![Prod]({% image_path pipe-start.png %})
 
