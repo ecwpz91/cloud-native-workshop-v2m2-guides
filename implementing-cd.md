@@ -177,13 +177,19 @@ To simplify the pipeline in this workshop, we simulate the build and tests and s
 
 Before promoting the dev image, you need to modify a **RoleBinding** to access the dev image by Jenkins. This allows the Jenkins service account in the **userXX-coolstore-prod** project to access the image within the **userXX-coolstore-dev** project.
 
-Go to overview page of the `userXX-coolstore-dev` project, then navigate to _Administration > Role Bindings_. Click on **ci_admin**:
+Go to _Resources > Membership_ page of the `userXX-coolstore-dev` project:
 
 ![Prod]({% image_path coolstore-dev-ci-admin.png %})
 
-Move to **YAML** tab and replace your username with _userXX_ then click on **Save**:
+Click on the _Service Accounts_ tab and _Edit Membership_:
+
+![Prod]({% image_path coolstore-dev-ci-admin-edit.png %})
+
+Select **userXX-coolstore-prod/jenkins** as the user name, the **edit** role for the user, and **Add** to create the service account.
 
 ![Prod]({% image_path coolstore-dev-ci-admin-save.png %})
+
+When finished click **Done Editing** in the top right hand corner.
 
 Let's invoke the build pipeline by using [OpenShift web console]({{ CONSOLE_URL}}){:target="_blank"}. Open the production project in the web console.
 
