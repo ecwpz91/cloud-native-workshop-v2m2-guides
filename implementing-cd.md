@@ -108,7 +108,7 @@ The first step for any deployment pipeline is to store all code and configuratio
 OpenShift has built-in support for CI/CD pipelines by allowing developers to define a [Jenkins pipeline](https://jenkins.io/solutions/pipeline/){:target="_blank"} for execution by a Jenkins
 automation engine, which is automatically provisioned on-demand by OpenShift when needed.
 
-The build can get started, monitored, and managed by OpenShift in the same way as any other build types e.g. S2I. Pipeline workflows are defined in a Jenkinsfile, either embedded directly in the build configuration, or supplied in \a Git repository and referenced by the build configuration. They are written using the
+The build can get started, monitored, and managed by OpenShift in the same way as any other build types e.g. S2I. Pipeline workflows are defined in a Jenkinsfile, either embedded directly in the build configuration, or supplied in a Git repository and referenced by the build configuration. They are written using the
 [Groovy scripting language](http://groovy-lang.org/).
 
 As part of the production environment template you used in the last step, a Pipeline build object was created. Ordinarily the pipeline would contain steps to build the project in the _dev_ environment, store the resulting image in the local repository, run the image and execute tests against it, then wait for human approval to _promote_ the resulting image to other environments like test or production.
@@ -117,7 +117,11 @@ As part of the production environment template you used in the last step, a Pipe
 
 ---
 
-Our pipeline is somewhat simplified for the purposes of this Workshop. Inspect the contents of the pipeline by navigating _Builds > Pipelines_ and click on `monolith-pipeline` in the [OpenShift web console]({{ CONSOLE_URL}}){:target="_blank"}. Then, click _Actions > Edit_ in the top right hand corner and you will see the details of _Jenkinsfile_:
+Our pipeline is somewhat simplified for the purposes of this Workshop. Inspect the contents of the pipeline by navigating _Builds > Pipelines_ and click on `monolith-pipeline` in the [OpenShift web console]({{ CONSOLE_URL}}){:target="_blank"}.
+
+![monolith-pipeline]({% image_path coolstore-prod-monolith-pipeline.png %})
+
+Then, click _Actions > Edit_ in the top right hand corner and you will see the details of _Jenkinsfile_:
 
 ![monolith-pipeline]({% image_path coolstore-prod-monolith-bc.png %})
 
@@ -185,19 +189,19 @@ Click on the _Service Accounts_ tab and _Edit Membership_:
 
 ![Prod]({% image_path coolstore-dev-ci-admin-edit.png %})
 
-Select **userXX-coolstore-prod/jenkins** as the user name, the **edit** role for the user, and **Add** to create the service account.
+Select **userXX-coolstore-prod/jenkins** as the user name, select the **edit** role, and click **Add** to create the new service account.
 
 ![Prod]({% image_path coolstore-dev-ci-admin-save.png %})
 
 When finished click **Done Editing** in the top right hand corner.
 
-Let's invoke the build pipeline by using [OpenShift web console]({{ CONSOLE_URL}}){:target="_blank"}. Open the production project in the web console.
-
-You can also add the edit policy for the `userXX-coolstore-prod` Jenkins service account to the `userXX-coolstore-dev` project via the following command from the CodeReady Workspaces Terminal window:
+You can also add the edit policy for the **userXX-coolstore-prod** Jenkins service account to the **userXX-coolstore-dev** project via the following command from the CodeReady Workspaces Terminal window:
 
 `oc policy add-role-to-user edit system:serviceaccount:userXX-coolstore-prod:jenkins -n userXX-coolstore-dev`
 
-Next, navigate to _Builds > Build Configs > monolith-pipeline_, click the small menu at the far right, and click _Start Build_:
+Let's invoke the build pipeline by using [OpenShift web console]({{ CONSOLE_URL}}){:target="_blank"}. Open the production project in the web console.
+
+Next, navigate to _Builds > Pipelines > monolith-pipeline_, and click _Start Build_:
 
 ![Prod]({% image_path pipe-start.png %})
 
