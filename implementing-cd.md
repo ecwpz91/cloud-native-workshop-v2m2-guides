@@ -209,7 +209,7 @@ This will start the pipeline. _It will take a minute or two to start the pipelin
 
 ![Prod]({% image_path pipe-prog.png %})
 
-Once the pipeline completes, return to the Prod Project Status at [OpenShift web console]({{ CONSOLE_URL}}){:target="_blank"} and notice that the application is now deployed and running!
+Once the pipeline completes, return to the Prod Project Overview at [OpenShift web console]({{ CONSOLE_URL}}){:target="_blank"} and notice that the application is now deployed and running!
 
 ![Prod]({% image_path pipe-done.png %})
 
@@ -239,11 +239,15 @@ In this step, we'll add a final checkpoint to the pipeline which will require yo
 
 Ordinarily your pipeline definition would be checked into a source code management system like Git, and to change the pipeline you'd edit the _Jenkinsfile_ in the source base. For this workshop we'll just edit it directly to add the necessary changes. You can edit it with the **oc** command but we'll use the Web Console.
 
-Go back to _Builds > Build Configs > monolith-pipeline_ then click on _Edit Build Config_.
+Go back to _Builds > Pipelines > monolith-pipeline_.
+
+![Prod]({% image_path coolstore-prod-monolith-pipeline.png %})
+
+Then, click _Actions > Edit_ in the top right hand corner and you will see the details of _Jenkinsfile_:
 
 ![Prod]({% image_path pipe-edit.png %})
 
-Click on **YAML** tab and add _a new stage_ to the pipeline, just before the _Deploy to PROD_ stage:
+Add _a new stage_ to the pipeline, just before the _Deploy to PROD_ stage:
 
 > NOTE: You will need to copy and paste the below code into the right place as shown in the below image.
 
@@ -269,7 +273,7 @@ Click **Save**.
 
 With the approval step in place, let's simulate a new change from a developer who wants to change the color of the header in the coolstore to a blue background color.
 
-First, open _monolith/src/main/webapp/app/css/coolstore.css_ via CodeReady Workspace, which contains the CSS stylesheet for the CoolStore app.
+First, open `monolith/src/main/webapp/app/css/coolstore.css` via CodeReady Workspace, which contains the CSS stylesheet for the CoolStore app.
 
 Add the following CSS to turn the header bar background to blue (**Copy** to add it at the bottom):
 
@@ -305,13 +309,13 @@ Now wait for it to complete the deployment via CodeReady Workspaces Terminal:
 
 `oc -n userXX-coolstore-dev rollout status -w dc/coolstore`
 
-And verify that the blue header is visible in the dev application by navigating to the `userXX-coolstore-dev` project in the OpenShift Console, and then going to _Networking > Routes_ and clicking on the route URL. It should look like the following:
+And verify that the blue header is visible in the dev application by navigating to the `userXX-coolstore-dev` project in the OpenShift Console, and then going to _Applications > Routes_ and clicking on the route URL. It should look like the following:
 
 > If it doesn't, you may need to do a hard browser refresh. Try holding the shift key while clicking the browser refresh button.
 
 ![Dev]({% image_path nav-blue.png %})
 
-Then navigating to the `userXX-coolstore-prod` project in the OpenShift Console, and then going to _Networking > Routes_ and clicking on the route URL for the production app. It should still be black:
+Then navigating to the `userXX-coolstore-prod` project in the OpenShift Console, and then going to _Applications > Routes_ and clicking on the route URL for the production app. It should still be black:
 
 ![Prod]({% image_path pipe-orig.png %})
 
@@ -321,7 +325,7 @@ We're happy with this change in dev, so let's promote the new change to prod, us
 
 ---
 
-Invoke the pipeline once more by navigating to _Builds > Build Configs > monolith-pipeline > Rebuild_. The same pipeline progress will be shown, however before deploying to prod, you will see a prompt in the pipeline:
+Invoke the pipeline once more by navigating to _Builds > Pipelines > monolith-pipeline > Start Pipeline_. The same pipeline progress will be shown, however before deploying to prod, you will see a prompt in the pipeline:
 
 ![Prod]({% image_path pipe-start2.png %}).
 
@@ -362,7 +366,9 @@ Manually triggering the deployment pipeline to run is useful but it would be bet
 
 In order to automate triggering the pipeline, you can define a webhook on your Git repository to notify OpenShift on every commit that is made to the Git repository and trigger a pipeline execution.
 
-You can get see the webhook links in the [OpenShift web console]({{ CONSOLE_URL}}){:target="_blank"} by going to _Builds > Build Configs > monolith-pipeline_. Look for the _Generic secret_ value in the _YAML_ tab. Copy this down.
+You can get see the webhook links in the [OpenShift web console]({{ CONSOLE_URL}}){:target="_blank"} by going to _Builds > Pipelines > monolith-pipeline_. Look for the _Generic Webhook URL_ value in the _Configuration_ tab. Copy this down or click the clipboard icon next to the URL.
+
+![Repository Settings]({% image_path coolstore-prod-monolith-pipeline-configuration.png %})
 
 Then go back to the _Overview_ tab. At the bottom you'll find the _Generic_ webhook url which you will need (along with the secret) in the next steps.
 
@@ -386,7 +392,7 @@ Click on **Add Webhook**.
 
 ![Repository Webhook]({% image_path cd-gogs-webhook-add.png %}){:width="660px"}
 
-All done. You can **click on the newly defined webhook** to see the list of *Recent Delivery*.  Click on the **Test Delivery** button allows you to manually trigger the webhook for testing purposes. Click on it and verify that the _monolith-pipeline_ starts running immediately (navigate to _Builds > Builds_ then you should see one running. Click on it to ensure the pipeline is executing, and optionally confirm the _Approve Go Live_ as before).
+All done. You can **click on the newly defined webhook** to see the list of *Recent Delivery*.  Click on the **Test Delivery** button allows you to manually trigger the webhook for testing purposes. Click on it and verify that the _monolith-pipeline_ starts running immediately (navigate to _Builds > Pipelines_ then you should see one running. Click on it to ensure the pipeline is executing, and optionally confirm the _Approve Go Live_ as before).
 
 `Congratulations!` You have added a human approval step for all future developer changes. You now have two projects that can be visualized as:
 
